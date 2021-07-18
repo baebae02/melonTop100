@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<style>
+  .font-sm { font-size: 0.9rem;}
+</style>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jinja Test Page</title>
+  </head>
+  <body>
+    <h1>Jinja Test  : {{title}} </h1>
+    <hr>
+      <ul>
+          {% for nav in navs recursive %} <!--nav는 nav class 타입, navs는 list 타입-->
+          <li>
+            <a href="{{nav.url | e}}">{{nav.title}} - {{loop.depth}}</a> <!--url은 escape 해주는 게 원칙이라는데 무슨 말인지 모르겠다.-->
+            {%- if nav.children -%}
+            <ul class="{% if loop.depth != 3 %} font-sm {% endif %}">
+              {{loop(nav.children)}}
+            </ul>
+            {%- endif -%}
+          </li>
+          {% endfor %}
+      </ul>
+    </hr>
+    <pre>
+      ttt 한글
+      { %- if True -% }
+        TTT
+      { %- end if -% }
+        qqqq
+    </pre>
+  </body>
+</html>
